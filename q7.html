@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel and Consonant Counter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6e7eaa, #2a3d68);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px 50px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        h1{
+            margin-inline: 10px;
+        }
+        input,
+        btn-tt {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        button a{
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 50px;
+            cursor: pointer;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #df8b0d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Vowel and Consonant Counter</h1>
+        <p>Enter a string to count the vowels and consonants:</p>
+        <input type="text" id="inputText" placeholder="Enter your text" />
+        <button class="btn-tt" onclick="countVowelsConsonants()">Count</button>
+
+        <div class="result">
+            <p id="vowelCount">Vowels: 0</p>
+            <p id="consonantCount">Consonants: 0</p>
+        </div>
+        <button type="button"><a href="./index.html">Go to HOME</a></button>
+    </div>
+
+    <script>
+        function countVowelsConsonants() {
+            const inputText = document.getElementById('inputText').value;
+            let vowels = 'aeiouAEIOU';
+            let vowelCount = 0;
+            let consonantCount = 0;
+
+            // Loop through the input string
+            for (let i = 0; i < inputText.length; i++) {
+                let char = inputText[i].toLowerCase();
+
+                if (/[a-zA-Z]/.test(char)) { // Check if the character is a letter
+                    if (vowels.includes(char)) {
+                        vowelCount++;
+                    } else {
+                        consonantCount++;
+                    }
+                }
+            }
+
+            // Display the result
+            document.getElementById('vowelCount').innerText = 'Vowels: ' + vowelCount;
+            document.getElementById('consonantCount').innerText = 'Consonants: ' + consonantCount;
+        }
+    </script>
+</body>
+
+</html>

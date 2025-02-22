@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uppercase Converter</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and Background */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6e7eaa, #2a3d68);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Centered Container */
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px 50px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #f0f0f0;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        /* Input Styling */
+        .input-group input {
+            padding: 12px;
+            font-size: 16px;
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background: #f1f1f1;
+            color: #333;
+            transition: border 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        /* Button Styling */
+        .input-group button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .input-group button:hover {
+            background-color: #45a049;
+        }
+
+        /* Result Styling */
+        #ans {
+            margin-top: 20px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #f0f0f0;
+        }
+        button a{
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #df8b0d;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px 30px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .input-group input, .input-group button {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Convert String to Uppercase</h1>
+
+        <div class="input-group">
+            <input type="text" id="str" placeholder="Enter string to convert to uppercase">
+        </div>
+        
+        <div class="input-group">
+            <button type="button" id="btn">Convert to Uppercase</button>
+        </div>
+
+        <h1 id="ans"></h1>
+        <button type="button"><a href="./index.html">Go to HOME</a></button>
+    </div>
+    
+    <!-- Use CDN for jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#btn").on("click", function() {
+                let str = document.getElementById("str").value;
+                let uppercase = str.toUpperCase();    
+
+                document.getElementById("ans").innerHTML = uppercase;
+            });
+        });
+    </script>
+
+</body>
+</html>

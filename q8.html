@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Second Smallest and Second Largest</title>
+    <style>
+        * {
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6e7eaa, #2a3d68);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px 50px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        input {
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #df8b0d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #df8b0d;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Second Smallest and Second Largest</h2>
+        <input type="number" id="str1" placeholder="Enter a number"><br><br>
+        <input type="number" id="str2" placeholder="Enter a number"><br><br>
+        <input type="number" id="str3" placeholder="Enter a number"><br><br>
+        <input type="number" id="str4" placeholder="Enter a number"><br><br>
+        <input type="number" id="str5" placeholder="Enter a number"><br><br>
+        <button id="btn">Sort and Find Second Smallest and Second Largest</button>
+
+        <div class="result">
+            <h3 id="lowest"></h3>
+            <h3 id="highest"></h3>
+        </div>
+        <button type="button"><a style="color: #ffffff; font-size: 15px;font-weight: 500;" href="./index.html">Go to HOME</a></button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn").on("click", function () {
+                let arr = [];
+                // Collect input values
+                for (let i = 1; i <= 5; i++) {
+                    let val = parseFloat(document.getElementById(`str${i}`).value); // Use parseFloat for more flexibility
+                    if (!isNaN(val)) {
+                        arr.push(val);  // Push only valid numbers
+                    }
+                }
+
+                // Sort the array in ascending order
+                arr.sort(function (a, b) {
+                    return a - b; // Sorting in numeric order
+                });
+
+                // Update the input fields with the sorted values
+                for (let i = 0; i < arr.length; i++) {
+                    document.getElementById(`str${i + 1}`).value = arr[i];
+                }
+
+                // Check if we have at least two numbers to work with
+                if (arr.length >= 2) {
+                    document.getElementById("lowest").innerHTML = `2nd Smallest Number: ${arr[1]}`;
+                    document.getElementById("highest").innerHTML = `2nd Largest Number: ${arr[arr.length - 2]}`;
+                } else {
+                    document.getElementById("lowest").innerHTML = "Please enter at least two valid numbers.";
+                    document.getElementById("highest").innerHTML = "";
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

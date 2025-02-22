@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longest Word Finder</title>
+    <style>
+        *{
+            text-decoration: none;
+            list-style: none;
+        }
+        body{
+            margin: 50px;
+            font-family: 'Arial', sans-serif;
+            background: #6086de;
+            color: white;
+            text-align: center;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #df8b0d;
+        }
+        
+        .ans {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 30px;
+            color: #333;
+        }
+        button-t a{
+            color: white !important;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        button-t {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button-t:hover {
+            background-color: #df8b0d;
+        }
+    </style>
+</head>
+<body>
+    <h2>Longest Word Finder</h2>
+    <input type="text" id="str" placeholder="Enter a string :-">
+    <button id="btn">Find Longest Word</button>
+    <div class="ans" id="ans"></div>
+    <button type="button-t"><a style="color: #ffffff; font-size: 16px;font-weight: 500;" href="./index.html">Go to HOME</a></button>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#btn').click(function() {
+                let inputStr = $('#str').val();
+                let words = inputStr.split(/\s+/);  // Split by any whitespace (spaces, tabs, etc.)
+                let longestWord = "";
+
+                // Loop through the words to find the longest one
+                words.forEach(function(word) {
+                    // Remove any punctuation from the word
+                    word = word.replace(/[^\w\s]|_/g, "").replace(/\s+/g, ""); // Removing punctuation
+
+                    if (word.length > longestWord.length) {
+                        longestWord = word;
+                    }
+                });
+
+                // Display the longest word
+                document.getElementById("ans").innerHTML = longestWord || "No words found.";
+            });
+        });
+    </script>
+</body>
+</html>

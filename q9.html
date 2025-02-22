@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Numbers in Range</title>
+    <style>
+        *{
+            text-decoration: none;
+            list-style: none;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6e7eaa, #6086de);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px 50px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        input {
+            margin: 10px;
+            padding: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            transition: 0.5s all ease;
+            background-color: #df8b0d;
+        }
+        h1 {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+   <div class="container">
+    <h2>Prime Numbers Finder</h2>
+    <input type="number" id="number" placeholder="Enter a number"><br><br>
+    <button id="btn">Find Prime Numbers</button>
+    
+    <div class="result">
+        <h3 id="ans"></h3>
+    </div>
+    <button type="button"><a style="color: #ffffff; font-size: 14px;font-weight: 500;" href="./index.html">Go to HOME</a></button>
+
+   </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn").on("click", function () {
+                let num = parseInt(document.getElementById("number").value); // Get the input number
+
+                if (isNaN(num) || num <= 0) {
+                    document.getElementById("ans").innerHTML = "Please enter a valid positive number.";
+                    return;
+                }
+
+                // Function to check if a number is prime
+                function isPrime(n) {
+                    if (n < 2) return false; // 0 and 1 are not prime
+                    for (let i = 2; i <= Math.sqrt(n); i++) {
+                        if (n % i === 0) return false;
+                    }
+                    return true;
+                }
+
+                // Find primes in the range 0 to num
+                let primeNumbers = [];
+                for (let i = 0; i <= num; i++) {
+                    if (isPrime(i)) {
+                        primeNumbers.push(i);
+                    }
+                }
+
+                // Display the prime numbers
+                if (primeNumbers.length > 0) {
+                    document.getElementById("ans").innerHTML = "Prime Numbers: " + primeNumbers.join(", ");
+                } else {
+                    document.getElementById("ans").innerHTML = "No prime numbers found in this range.";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
