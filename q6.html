@@ -5,90 +5,217 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Longest Word Finder</title>
     <style>
-        *{
-            text-decoration: none;
-            list-style: none;
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
-        body{
-            margin: 50px;
-            font-family: 'Arial', sans-serif;
-            background: #6086de;
+
+        /* Background Gradient */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #000000;
             color: white;
             text-align: center;
         }
-        input {
-            margin: 10px;
-            padding: 10px;
-            width: 300px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
+
+        /* Main Container */
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px 50px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+            border: 2px solid #f7ba2b;
+            overflow: hidden;
         }
-        button {
-            padding: 10px 20px;
-            cursor: pointer;
-            background: #ff9800;
+
+        /* Glowing Effect */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #f7ba2b, #ea5358);
+            z-index: -1;
+            transform: scale(1.2);
+            filter: blur(25px);
+            opacity: 0.5;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        /* Title */
+        h1 {
+            font-size: 26px;
+            color: #f7ba2b;
+            margin-bottom: 20px;
+        }
+
+        /* Input Styling */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            padding: 12px;
+            font-size: 16px;
+            width: 100%;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            outline: none;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 165, 0, 0.3);
+        }
+
+        /* Glowing Effect on Focus */
+        .input-group input:focus {
+            border-color: #f7ba2b;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.9);
+        }
+
+        /* Button Styling */
+        .input-group button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #f7ba2b, #ea5358);
             color: white;
             border: none;
             border-radius: 5px;
-        }
-        button:hover {
-            background-color: #df8b0d;
-        }
-        
-        .ans {
-            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
             font-weight: bold;
-            font-size: 30px;
-            color: #333;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
         }
-        button-t a{
-            color: white !important;
+
+        /* Button Hover Effect */
+        .input-group button:hover {
+            background: linear-gradient(45deg, #ea5358, #f7ba2b);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Output Text */
+        #ans {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 3px #f7ba2b;
+        }
+
+        /* Home Button */
+        .home-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: white;
+            text-decoration: none;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 87, 34, 0.6);
         }
-        button-t {
-            padding: 10px 20px;
-            cursor: pointer;
-            background: #ff9800;
+
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
             color: white;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
         }
-        button-t:hover {
-            background-color: #df8b0d;
+
+        .reset-btn:hover {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+        /* Home Button Hover */
+        .home-btn:hover {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            box-shadow: 0 0 12px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px 30px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .input-group input, .input-group button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <h2>Longest Word Finder</h2>
-    <input type="text" id="str" placeholder="Enter a string :-">
-    <button id="btn">Find Longest Word</button>
-    <div class="ans" id="ans"></div>
-    <button type="button-t"><a style="color: #ffffff; font-size: 16px;font-weight: 500;" href="./index.html">Go to HOME</a></button>
+
+    <div class="container">
+        <h1>Longest Word Finder</h1>
+
+        <div class="input-group">
+            <input type="text" id="str" placeholder="Enter a sentence">
+        </div>
+        
+        <div class="input-group">
+            <button type="button" id="btn">Find Longest Word</button>
+        </div>
+        <h1 id="ans"></h1>
+        <button class="reset-btn" id="resetBtn">Reset</button>
+        <a href="./index.html" class="home-btn">Go to Home</a>
+    </div>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            document.getElementById("resetBtn").addEventListener("click", function () {
+                document.getElementById("str").value = ""
+                document.getElementById("ans").innerHTML = "";
+            });
             $('#btn').click(function() {
                 let inputStr = $('#str').val();
-                let words = inputStr.split(/\s+/);  // Split by any whitespace (spaces, tabs, etc.)
+                let words = inputStr.split(/\s+/); 
                 let longestWord = "";
-
-                // Loop through the words to find the longest one
                 words.forEach(function(word) {
-                    // Remove any punctuation from the word
-                    word = word.replace(/[^\w\s]|_/g, "").replace(/\s+/g, ""); // Removing punctuation
+                
+                    word = word.replace(/[^\w\s]|_/g, "").replace(/\s+/g, "");
 
                     if (word.length > longestWord.length) {
                         longestWord = word;
                     }
                 });
-
-                // Display the longest word
-                document.getElementById("ans").innerHTML = longestWord || "No words found.";
+                $('#ans').text(longestWord || "No words found.");
             });
         });
     </script>
+
 </body>
 </html>

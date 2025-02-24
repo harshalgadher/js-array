@@ -10,63 +10,161 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            list-style: none;
-            text-decoration: none;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6e7eaa, #2a3d68);
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            background:#000000;
+            color: white;
+            text-align: center;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
             padding: 40px 50px;
-            border-radius: 10px;
-            text-align: center;
+            border-radius: 12px;
             max-width: 400px;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+            border: 2px solid #f7ba2b;
+            overflow: hidden;
         }
-        h1{
-            margin-inline: 10px;
-        }
-        input,
-        btn-tt {
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            display: block;
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #f7ba2b, #ea5358);
+            z-index: -1;
+            transform: scale(1.2);
+            filter: blur(25px);
+            opacity: 0.5;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #f7ba2b;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            padding: 12px;
+            font-size: 16px;
+            width: 100%;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            outline: none;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 165, 0, 0.3);
+        }
+
+        .input-group input:focus {
+            border-color: #f7ba2b;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.9);
+        }
+
+        .input-group button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #f7ba2b, #ea5358);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+        }
+
+        .input-group button:hover {
+            background: linear-gradient(45deg, #ea5358, #f7ba2b);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.9);
+            transform: scale(1.05);
         }
 
         .result {
             margin-top: 20px;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
-        }
-        button a{
             color: white;
-            font-size: 16px;
-            font-weight: 500;
+            text-shadow: 0 0 8px #f7ba2b;
         }
-        button {
-            margin-top: 10px;
-            padding: 10px 50px;
-            cursor: pointer;
-            background: #ff9800;
+
+        .home-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 87, 34, 0.6);
+        }
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
             color: white;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
         }
-        button:hover {
-            background-color: #df8b0d;
+
+        .reset-btn:hover {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+
+        .home-btn:hover {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            box-shadow: 0 0 12px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+        .m-10{
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px 30px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .input-group input, .input-group button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -74,29 +172,35 @@
 <body>
     <div class="container">
         <h1>Vowel and Consonant Counter</h1>
-        <p>Enter a string to count the vowels and consonants:</p>
-        <input type="text" id="inputText" placeholder="Enter your text" />
-        <button class="btn-tt" onclick="countVowelsConsonants()">Count</button>
+        <p class="m-10">Enter a string to count the vowels and consonants:</p>
+
+        <div class="input-group">
+            <input type="text" id="inputText" placeholder="Enter your text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        </div>
+
+        <div class="input-group">
+            <button type="button" id="btn">Count</button>
+        </div>
 
         <div class="result">
             <p id="vowelCount">Vowels: 0</p>
             <p id="consonantCount">Consonants: 0</p>
         </div>
-        <button type="button"><a href="./index.html">Go to HOME</a></button>
+        <button class="reset-btn" id="resetBtn">Reset</button>
+        <a href="./index.html" class="home-btn">Go to Home</a>
     </div>
 
     <script>
-        function countVowelsConsonants() {
-            const inputText = document.getElementById('inputText').value;
+        document.getElementById("btn").addEventListener("click", function() {
+            const inputText = document.getElementById('inputText').value.trim();
             let vowels = 'aeiouAEIOU';
             let vowelCount = 0;
             let consonantCount = 0;
 
-            // Loop through the input string
             for (let i = 0; i < inputText.length; i++) {
                 let char = inputText[i].toLowerCase();
 
-                if (/[a-zA-Z]/.test(char)) { // Check if the character is a letter
+                if (/[a-zA-Z]/.test(char)) {
                     if (vowels.includes(char)) {
                         vowelCount++;
                     } else {
@@ -104,12 +208,14 @@
                     }
                 }
             }
-
-            // Display the result
+            document.getElementById("resetBtn").addEventListener("click", function () {
+                document.getElementById("inputText").value = ""
+                document.getElementById('vowelCount').innerText = 'Vowels: 0';
+                document.getElementById('consonantCount').innerText = 'Consonants: 0';
+            });
             document.getElementById('vowelCount').innerText = 'Vowels: ' + vowelCount;
             document.getElementById('consonantCount').innerText = 'Consonants: ' + consonantCount;
-        }
+        });
     </script>
 </body>
-
 </html>

@@ -5,94 +5,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
+        /* General Reset */
         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             text-decoration: none;
             list-style: none;
+            font-family: 'Poppins', sans-serif;
         }
 
-        body{
-            font-family: 'Arial', sans-serif;
-            background: #6086de;
+        /* Background Styling */
+        body {
+            background: black;
             color: white;
             text-align: center;
-        }
-
-        button a {
-            color: white;
-            font-size: 20px;
-            font-weight: 500;
-        }
-
-        button {
-            margin-top: 10px;
-            padding: 10px 50px;
-            cursor: pointer;
-            background: #ff9900;
-            color: white;
-            border: none;
-            border-radius: 10px;
-        }
-
-        button:hover {
-            background-color: #df8b0d;
-        }
-
-        .btn-t {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
             align-items: center;
-            background-color: #e8a43e;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: .25rem;
-            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-            box-sizing: border-box;
+            flex-direction: column;
+            padding: 20px;
+            
+        }
+
+        /* Main Container */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 3px 20px #f7ba2bcc;
+            max-width: 800px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            border: 2px solid #f7ba2b;
+        }
+
+        h1 {
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff6122;
+            font-weight: 800;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Button Styling */
+        .btn-t {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
             color: white !important;
-            cursor: pointer;
-            display: inline-flex;
-            font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            padding: 12px 20px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
-            justify-content: center;
-            line-height: 1.25;
-            min-height: 3rem;
-            padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-            text-decoration: none;
-            transition: all 250ms;
-            user-select: none;
-            touch-action: manipulation;
-            vertical-align: baseline;
-            width: auto;
-            padding: 10px 20px;
+            text-transform: uppercase;
+            display: inline-block;
+            transition: 0.3s;
+            border: none;
+            box-shadow: 0 4px 8px rgba(255, 87, 34, 0.5);
+            cursor: pointer;
         }
 
         .btn-t:hover {
-            transform: translateY(-1px);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 87, 34, 0.7);
         }
 
         .margin-tt {
-            margin: 30px;
+            margin: 10px;
+        }
+
+        /* Flexbox for Buttons */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .btn-t {
+                width: 100%;
+            }
         }
     </style>
+
 </head>
 
 <body>
+
     <div class="container">
-        <div class="d-flex">
-            <div class="margin-tt"><a href="./q1.html" target="_blank"><button class="btn-t">Palindrome</button></a></div>
-            <div class="margin-tt"><a href="./q2.html" target="_blank"><button class="btn-t">Anagrame</button></a></div>
-            <div class="margin-tt"><a href="./q3.html" target="_blank"><button class="btn-t">Uppercase</button></a></div>
-            <div class="margin-tt"><a href="./q4.html" target="_blank"><button class="btn-t">Lovercase</button></a></div>
-            <div class="margin-tt"><a href="./q5.html" target="_blank"><button class="btn-t">toggleclass</button></a></div>
-            <div class="margin-tt"><a href="./q6.html" target="_blank"><button class="btn-t">longest word</button></a></div>
-            <div class="margin-tt"><a href="./q7.html" target="_blank"><button class="btn-t">Number of vovels and constace</button></a>
-            </div>
-            <div class="margin-tt"><button class="btn-t"><a href="./q8.html">second largest and second
-                        smallest</a></button></div>
-            <div class="margin-tt"><button class="btn-t"><a href="./q9.html">remove duplicate elements</a></button>
-            </div>
+        <h1>Select an Option</h1>
+
+        <div class="button-container">
+            <a href="./q1.html" target="_blank" class="margin-tt"><button class="btn-t">Palindrome</button></a>
+            <a href="./q2.html" target="_blank" class="margin-tt"><button class="btn-t">Anagram</button></a>
+            <a href="./q3.html" target="_blank" class="margin-tt"><button class="btn-t">Uppercase</button></a>
+            <a href="./q4.html" target="_blank" class="margin-tt"><button class="btn-t">Lowercase</button></a>
+            <a href="./q5.html" target="_blank" class="margin-tt"><button class="btn-t">Toggle Case</button></a>
+            <a href="./q6.html" target="_blank" class="margin-tt"><button class="btn-t">Longest Word</button></a>
+            <a href="./q7.html" target="_blank" class="margin-tt"><button class="btn-t">Vowels & Consonants</button></a>
+            <a href="./q8.html" target="_blank" class="margin-tt"><button class="btn-t">2nd Largest & Smallest</button></a>
+            <a href="./q9.html" target="_blank" class="margin-tt"><button class="btn-t">Remove Duplicates</button></a>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>

@@ -4,77 +4,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remove Duplicates from Array</title>
+    <title>Remove Duplicates from Input</title>
 
     <style>
+        /* General Reset */
         * {
-            text-decoration: none;
-            list-style: none;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
+        /* Background Gradient */
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6e7eaa, #2a3d68);
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            background: #000000;
+            color: white;
+            text-align: center;
         }
 
+        /* Main Container */
         .container {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
             padding: 40px 50px;
-            border-radius: 10px;
-            text-align: center;
+            border-radius: 12px;
             max-width: 400px;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+            border: 2px solid #f7ba2b;
+            overflow: hidden;
         }
 
-        input {
-            width: 250px;
+        /* Glowing Effect */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #f7ba2b, #ea5358);
+            z-index: -1;
+            transform: scale(1.2);
+            filter: blur(25px);
+            opacity: 0.5;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        /* Title */
+        h1 {
+            font-size: 26px;
+            color: #f7ba2b;
+            margin-bottom: 20px;
+        }
+
+        /* Input Styling */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
             padding: 12px;
             font-size: 16px;
-            border: 2px solid white;
-            border-radius: 8px;
+            width: 100%;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            background: #222;
+            color: #fabf34;
+            font-weight: 700;
             outline: none;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            margin: 8px;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 165, 0, 0.3);
         }
 
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+        /* Glowing Effect on Focus */
+        .input-group input:focus {
+            border-color: #f7ba2b;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.9);
         }
 
-        button {
-            margin-top: 10px;
+        /* Button Styling */
+        .input-group button {
             padding: 12px 20px;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 16px;
+            background: linear-gradient(45deg, #f7ba2b, #ea5358);
             color: white;
-            background: #ff9800;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
             transition: 0.3s;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
         }
 
-        button:hover {
-            background: #e68900;
+        /* Button Hover Effect */
+        .input-group button:hover {
+            background: linear-gradient(45deg, #ea5358, #f7ba2b);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.9);
             transform: scale(1.05);
         }
 
-        button:active {
-            transform: scale(0.95);
+        /* Output Text */
+        .result {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 3px #f7ba2b;
         }
 
-        h1 {
-            margin-top: 15px;
+        .reset-btn {
+            margin-top: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
             color: white;
-            text-shadow: 2px 2px 5px black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+        }
+
+        .reset-btn:hover {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Home Button */
+        .home-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 87, 34, 0.6);
+        }
+
+        .m-10 {
+            margin-bottom: 15px;
+        }
+
+        /* Home Button Hover */
+        .home-btn:hover {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            box-shadow: 0 0 12px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px 30px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .input-group input,
+            .input-group button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -82,32 +189,47 @@
 <body>
 
     <div class="container">
-        <input type="text" id="input1" placeholder="Enter value 1">
-        <input type="text" id="input2" placeholder="Enter value 2">
-        <input type="text" id="input3" placeholder="Enter value 3">
-        <input type="text" id="input4" placeholder="Enter value 4">
-        <input type="text" id="input5" placeholder="Enter value 5">
+        <h1>Remove Duplicates</h1>
+        <p class="m-10">Enter numbers separated by commas.</p>
 
-        <button onclick="removeDuplicates()">Get Unique Values</button>
+        <div class="input-group">
+            <input type="text" id="inputValues" placeholder="Enter values here" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false">
+        </div>
 
-        <h1 id="ans"></h1>
-        <button type="button"><a style="color: #ffffff; font-size: 14px;font-weight: 500;" href="./index.html">Go to HOME</a></button>
+        <div class="input-group">
+            <button id="btn">Get Unique Values</button>
+        </div>
+        <button class="reset-btn" id="resetBtn">Reset</button>
+        <div class="result">
+            <p id="ans"></p>
+        </div>
+
+        <a href="./index.html" class="home-btn">Go to Home</a>
     </div>
 
     <script>
-        function removeDuplicates() {
-            let arr = [];
-            for (let i = 1; i <= 5; i++) {
-                let val = document.getElementById(`input${i}`).value.trim();
-                if (val !== "") {
-                    arr.push(val);
-                }
+
+        document.getElementById("btn").addEventListener("click", function () {
+            let inputText = document.getElementById("inputValues").value.trim();
+
+            if (inputText === "") {
+                document.getElementById("ans").innerHTML = "Please enter some values.";
+                return;
             }
-            let uniqueArray = [...new Set(arr)];
+            document.getElementById("resetBtn").addEventListener("click", function () {
+                document.getElementById("inputValues").value = ""
+                document.getElementById("ans").innerHTML = "";
+            });
+
+            // Split values by comma, trim spaces, and remove duplicates
+            let arr = inputText.split(",").map(item => item.trim());
+            let uniqueArray = [...new Set(arr)].filter(item => item !== ""); // Remove empty values
+
             document.getElementById("ans").innerHTML = uniqueArray.length > 0
                 ? `Unique Values: <b>${uniqueArray.join(", ")}</b>`
                 : "No unique values found!";
-        }
+        });
     </script>
 
 </body>

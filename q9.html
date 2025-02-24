@@ -1,106 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime Numbers in Range</title>
+    <title>Prime Numbers Finder</title>
     <style>
-        *{
-            text-decoration: none;
-            list-style: none;
-        }
-        body {
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6e7eaa, #6086de);
-            color: white;
+        }
+
+        /* Background Gradient */
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 40px 50px;
-            border-radius: 10px;
+            background: #000000;
+            color: white;
             text-align: center;
+        }
+
+        /* Main Container */
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px 50px;
+            border-radius: 12px;
             max-width: 400px;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+            border: 2px solid #f7ba2b;
+            overflow: hidden;
         }
-        input {
-            margin: 10px;
-            padding: 5px;
-            width: 200px;
+
+        /* Glowing Effect */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #f7ba2b, #ea5358);
+            z-index: -1;
+            transform: scale(1.2);
+            filter: blur(25px);
+            opacity: 0.5;
+            transition: opacity 0.4s ease-in-out;
         }
-        button {
-            padding: 10px 20px;
-            cursor: pointer;
-            background: #ff9800;
+
+        /* Title */
+        h1 {
+            font-size: 26px;
+            color: #f7ba2b;
+            margin-bottom: 20px;
+        }
+
+        /* Input Styling */
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group input {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            outline: none;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 165, 0, 0.3);
+        }
+
+        /* Remove number input scroll */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            /* Firefox */
+        }
+
+        /* Glowing Effect on Focus */
+        .input-group input:focus {
+            border-color: #f7ba2b;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.9);
+        }
+
+        /* Button Styling */
+        .input-group button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #f7ba2b, #ea5358);
             color: white;
             border: none;
             border-radius: 5px;
-        }
-        button:hover {
-            transition: 0.5s all ease;
-            background-color: #df8b0d;
-        }
-        h1 {
-            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
             font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+        }
+
+        /* Button Hover Effect */
+        .input-group button:hover {
+            background: linear-gradient(45deg, #ea5358, #f7ba2b);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Output Text */
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 3px #f7ba2b;
+        }
+
+        /* Reset Button */
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+        }
+
+        .reset-btn:hover {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Home Button */
+        .home-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 87, 34, 0.6);
+        }
+
+        /* Home Button Hover */
+        .home-btn:hover {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            box-shadow: 0 0 12px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
         }
     </style>
 </head>
+
 <body>
 
-   <div class="container">
-    <h2>Prime Numbers Finder</h2>
-    <input type="number" id="number" placeholder="Enter a number"><br><br>
-    <button id="btn">Find Prime Numbers</button>
-    
-    <div class="result">
-        <h3 id="ans"></h3>
+    <div class="container">
+        <h1>Prime Numbers Finder</h1>
+
+        <div class="input-group">
+            <input type="number" id="str1" placeholder="Enter a number" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="input-group">
+            <input type="number" id="str2" placeholder="Enter a number" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="input-group">
+            <input type="number" id="str3" placeholder="Enter a number" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="input-group">
+            <input type="number" id="str4" placeholder="Enter a number" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="input-group">
+            <input type="number" id="str5" placeholder="Enter a number" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="input-group">
+            <input type="number" id="str6" placeholder="Enter a number" autocomplete="off" autocorrect="off"
+                autocapitalize="off" spellcheck="false">
+        </div>
+
+        <div class="input-group">
+            <button id="btn">Find Prime Numbers</button>
+        </div>
+
+        <div class="result">
+            <p id="ans"></p>
+        </div>
+
+        <button class="reset-btn" id="resetBtn">Reset</button>
+        <a href="./index.html" class="home-btn">Go to Home</a>
     </div>
-    <button type="button"><a style="color: #ffffff; font-size: 14px;font-weight: 500;" href="./index.html">Go to HOME</a></button>
 
-   </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#btn").on("click", function () {
-                let num = parseInt(document.getElementById("number").value); // Get the input number
-
-                if (isNaN(num) || num <= 0) {
-                    document.getElementById("ans").innerHTML = "Please enter a valid positive number.";
-                    return;
+        document.getElementById("btn").addEventListener("click", function () {
+            let numbers = [];
+            for (let i = 1; i <= 6; i++) {
+                let val = parseInt(document.getElementById(`str${i}`).value);
+                if (!isNaN(val) && val > 0) {
+                    numbers.push(val);
                 }
-
-                // Function to check if a number is prime
-                function isPrime(n) {
-                    if (n < 2) return false; // 0 and 1 are not prime
-                    for (let i = 2; i <= Math.sqrt(n); i++) {
-                        if (n % i === 0) return false;
-                    }
-                    return true;
-                }
-
-                // Find primes in the range 0 to num
-                let primeNumbers = [];
-                for (let i = 0; i <= num; i++) {
-                    if (isPrime(i)) {
-                        primeNumbers.push(i);
-                    }
-                }
-
-                // Display the prime numbers
-                if (primeNumbers.length > 0) {
-                    document.getElementById("ans").innerHTML = "Prime Numbers: " + primeNumbers.join(", ");
-                } else {
-                    document.getElementById("ans").innerHTML = "No prime numbers found in this range.";
-                }
-            });
+            }
+            let primeNumbers = numbers.filter(num => isPrime(num));
+            document.getElementById("ans").innerHTML = primeNumbers.length > 0
+                ? "Prime Numbers: " + primeNumbers.join(", ")
+                : "No prime numbers found.";
         });
+
+        document.getElementById("resetBtn").addEventListener("click", function () {
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`str${i}`).value = "";
+            }
+            document.getElementById("ans").innerHTML = "";
+        });
+
+        function isPrime(n) {
+            if (n < 2) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
     </script>
 
 </body>

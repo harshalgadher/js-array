@@ -5,41 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lowercase Converter</title>
     <style>
-        /* General Reset */
+        /* Reset & Global Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            text-decoration: none;
-            list-style: none;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6e7eaa, #2a3d68);
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            background: #000;
+            color: white;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.9);
             padding: 40px 50px;
-            border-radius: 10px;
+            border-radius: 12px;
             text-align: center;
             max-width: 400px;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 165, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #f7ba2b;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #f7ba2b 0%, #ea5358 100%);
+            z-index: -1;
+            transform: scale(1.2);
+            filter: blur(25px);
+            opacity: 0.4;
         }
 
         h1 {
-            font-family: 'Times New Roman', Times, serif;
+            font-size: 26px;
+            color: #f7ba2b;
             margin-bottom: 20px;
-            font-size: 24px;
-            color: #f0f0f0;
         }
 
         .input-group {
@@ -50,103 +63,113 @@
             padding: 12px;
             font-size: 16px;
             width: 100%;
-            border: 2px solid #ccc;
+            border: 2px solid transparent;
             border-radius: 5px;
-            background: #f1f1f1;
-            color: #333;
-            transition: border 0.3s ease;
+            background: #222;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+            text-align: center;
         }
 
         .input-group input:focus {
-            border-color: #4CAF50;
-            outline: none;
+            border-color: #f7ba2b;
+            box-shadow: 0 0 8px #f7ba2b;
         }
 
         .input-group button {
             padding: 12px 20px;
             font-size: 16px;
-            background-color: #4CAF50;
+            background: linear-gradient(45deg, #f7ba2b, #ea5358);
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: 0.3s;
             width: 100%;
+            font-weight: bold;
         }
 
         .input-group button:hover {
-            background-color: #45a049;
-        }
-        button a{
-            color: white;
-            font-size: 16px;
-            font-weight: 500;
-        }
-        button {
-            padding: 10px 20px;
-            cursor: pointer;
-            background: #ff9800;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #df8b0d;
+            background: linear-gradient(45deg, #ea5358, #f7ba2b);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.8);
+            transform: scale(1.05);
         }
 
         #ans {
             margin-top: 20px;
-            font-size: 26px;  /* Font size updated */
+            font-size: 24px;
             font-weight: bold;
-            color: #f0f0f0;
+            color: white;
+            text-shadow: 0 0 3px #f7ba2b;
+        }
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
         }
 
-        @media (max-width: 500px) {
-            .container {
-                padding: 20px 30px;
-                width: 90%;
-            }
-
-            h1 {
-                font-size: 22px;
-            }
-
-            .input-group input, .input-group button {
-                font-size: 14px;
-            }
+        .reset-btn:hover {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+        .home-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
         }
 
+        .home-btn:hover {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            box-shadow: 0 0 12px rgba(255, 87, 34, 0.8);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>Convert String to Lowercase</h1>
 
         <div class="input-group">
-            <input type="text" id="str" placeholder="Enter string to convert to lowercase">
+            <input type="text" id="str" placeholder="Enter string to convert">
         </div>
         
         <div class="input-group">
             <button type="button" id="btn">Convert to Lowercase</button>
         </div>
-
+        
         <h1 id="ans"></h1>
-        <button type="button"><a href="./index.html">Go to HOME</a></button>
+        <button class="reset-btn" id="resetBtn">Reset</button>
+        <a href="./index.html" class="home-btn">Go to Home</a>
     </div>
     
-    <!-- Use CDN for jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $("#btn").on("click", function() {
-                let str = document.getElementById("str").value;
-                let lowercase = str.toLowerCase();    
-
-                document.getElementById("ans").innerHTML = lowercase;
-            });
+        document.getElementById("btn").addEventListener("click", function() {
+            let str = document.getElementById("str").value;
+            document.getElementById("ans").innerText = str.toLowerCase();
         });
+        document.getElementById("resetBtn").addEventListener("click", function () {
+                document.getElementById("str").value = ""
+                document.getElementById("ans").innerHTML = "";
+            });
     </script>
-
 </body>
 </html>

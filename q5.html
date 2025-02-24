@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Toggle Converter</title>
     <style>
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            text-decoration: none;
-            list-style: none;
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
-
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6e7eaa, #2a3d68);
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            background: black;
+            color: white;
+            text-align: center;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
             padding: 40px 50px;
-            border-radius: 10px;
-            text-align: center;
+            border-radius: 12px;
             max-width: 400px;
             width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+            border: 2px solid #f7ba2b;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, #f7ba2b, #ea5358);
+            z-index: -1;
+            transform: scale(1.2);
+            filter: blur(25px);
+            opacity: 0.5;
+            transition: opacity 0.4s ease-in-out;
         }
 
         h1 {
-            font-family: 'Times New Roman', Times, serif;
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #f0f0f0;
+            font-size: 26px;
+            color: #f7ba2b;
+            margin-bottom: 10px;
         }
 
         .input-group {
@@ -51,55 +64,90 @@
             padding: 12px;
             font-size: 16px;
             width: 100%;
-            border: 2px solid #ccc;
+            border: 2px solid transparent;
             border-radius: 5px;
-            background: #f1f1f1;
-            color: #333;
-            transition: border 0.3s ease;
+            background: #222;
+            color: white;
+            outline: none;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 165, 0, 0.3);
         }
 
         .input-group input:focus {
-            border-color: #4CAF50;
-            outline: none;
+            border-color: #f7ba2b;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.9);
         }
 
         .input-group button {
             padding: 12px 20px;
             font-size: 16px;
-            background-color: #4CAF50;
+            background: linear-gradient(45deg, #f7ba2b, #ea5358);
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: 0.3s;
             width: 100%;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
         }
 
         .input-group button:hover {
-            background-color: #45a049;
+            background: linear-gradient(45deg, #ea5358, #f7ba2b);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.9);
+            transform: scale(1.05);
         }
 
-        button a{
+        #ans {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
             color: white;
-            font-size: 16px;
-            font-weight: 500;
+            text-shadow: 0 0 3px #f7ba2b;
         }
-        button {
-            padding: 10px 20px;
-            cursor: pointer;
-            background: #ff9800;
+
+        .home-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 0 8px rgba(255, 87, 34, 0.6);
+        }
+
+        .home-btn:hover {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            box-shadow: 0 0 12px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
+        }
+
+        .reset-btn {
+            margin-top: 15px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #ff5722, #ff9800);
             color: white;
             border: none;
             border-radius: 5px;
-        }
-        button:hover {
-            background-color: #df8b0d;
-        }
-        #ans {
-            margin-top: 20px;
-            font-size: 26px;  /* Font size updated */
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
             font-weight: bold;
-            color: #f0f0f0;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+        }
+
+        .reset-btn:hover {
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.9);
+            transform: scale(1.05);
         }
 
         @media (max-width: 500px) {
@@ -112,13 +160,14 @@
                 font-size: 22px;
             }
 
-            .input-group input, .input-group button {
+            .input-group input,
+            .input-group button {
                 font-size: 14px;
             }
         }
-
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -127,44 +176,43 @@
         <div class="input-group">
             <input type="text" id="str" placeholder="Enter string to toggle case">
         </div>
-        
+
         <div class="input-group">
             <button type="button" id="btn">Toggle Case</button>
         </div>
 
         <h1 id="ans"></h1>
-        <button type="button"><a href="./index.html">Go to HOME</a></button>
+        <button class="reset-btn" id="resetBtn">Reset</button>
+        <a href="./index.html" class="home-btn">Go to Home</a>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            let currentStr = "";
+        $(document).ready(function () {
+            let originalStr = "";
+            let isToggled = false;
 
-            $('#btn').click(function() {
+            $('#btn').click(function () {
                 let inputStr = $('#str').val();
-                
-
                 if (inputStr === "") {
                     return;
                 }
-                
-
-                currentStr = inputStr.split('').map(char => {
-                    let newChar;
-                    if (char === char.toUpperCase()) {
-                        newChar = char.toLowerCase();
-                    } else {
-                        newChar = char.toUpperCase();
-                    }
-                    return newChar;
+                if (!isToggled) {
+                    originalStr = inputStr;
+                }
+                let toggledStr = isToggled ? originalStr : inputStr.split('').map(char => {
+                    return char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase();
                 }).join('');
-
-
-                $('#ans').text(currentStr);
+                $('#ans').text(toggledStr);
+                isToggled = !isToggled;
+            });
+            document.getElementById("resetBtn").addEventListener("click", function () {
+                document.getElementById("str").value = "";
+                document.getElementById("ans").innerHTML = "";
             });
         });
-    </script>
 
+    </script>
 </body>
+
 </html>
